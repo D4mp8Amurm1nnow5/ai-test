@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>现代科技网站</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>现代风格网站</title>
     <style>
         * {
             margin: 0;
@@ -14,212 +13,204 @@
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* 导航栏样式 */
-        .navbar {
             background: rgba(255, 255, 255, 0.95);
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #4a5568;
-        }
-
-        .nav-links a {
-            margin-left: 2rem;
-            text-decoration: none;
-            color: #4a5568;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        /* 表单容器 */
-        .form-container {
-            background: rgba(255, 255, 255, 0.95);
-            max-width: 400px;
-            margin: 5rem auto;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            transition: all 0.3s ease;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .form-title {
             text-align: center;
-            margin-bottom: 2rem;
-            color: #4a5568;
-        }
-
-        .form-group {
+            color: #2d3436;
             margin-bottom: 1.5rem;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #4a5568;
+        .input-group {
+            position: relative;
         }
 
-        .form-control {
+        .input-group input {
             width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
         }
 
-        .form-control:focus {
+        .input-group input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #4ecdc4;
         }
 
         .btn {
-            width: 100%;
-            padding: 1rem;
-            background: #667eea;
+            background: #4ecdc4;
             color: white;
+            padding: 12px;
             border: none;
-            border-radius: 6px;
-            font-size: 1rem;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s;
+            font-size: 16px;
+            transition: background 0.3s ease;
         }
 
         .btn:hover {
-            background: #764ba2;
+            background: #45b7b0;
         }
 
-        .form-footer {
+        .link-text {
             text-align: center;
-            margin-top: 1.5rem;
-            color: #718096;
+            margin-top: 1rem;
         }
 
-        .form-footer a {
-            color: #667eea;
+        .link-text a {
+            color: #4ecdc4;
             text-decoration: none;
+            font-weight: 500;
         }
 
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .form-container {
-                margin: 2rem auto;
-                width: 90%;
-            }
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">TechSite</div>
-        <div class="nav-links">
-            <a href="#home">首页</a>
-            <a href="#login" onclick="showForm('login')">登录</a>
-            <a href="#register" onclick="showForm('register')">注册</a>
-        </div>
-    </nav>
+    <div class="container" id="loginContainer">
+        <h2 class="form-title">欢迎登录</h2>
+        <form class="form-container" id="loginForm">
+            <div class="input-group">
+                <input type="email" id="loginEmail" placeholder="电子邮箱" required>
+                <div class="error-message" id="loginEmailError"></div>
+            </div>
+            <div class="input-group">
+                <input type="password" id="loginPassword" placeholder="密码" required>
+                <div class="error-message" id="loginPasswordError"></div>
+            </div>
+            <button type="submit" class="btn">登录</button>
+        </form>
+        <p class="link-text">还没有账号？ <a href="#" onclick="showRegister()">立即注册</a></p>
+    </div>
 
-    <div class="container">
-        <!-- 登录表单 -->
-        <div id="loginForm" class="form-container" style="display: none;">
-            <h2 class="form-title">用户登录</h2>
-            <form id="loginForm" onsubmit="return handleLogin(event)">
-                <div class="form-group">
-                    <label>电子邮箱</label>
-                    <input type="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>密码</label>
-                    <input type="password" class="form-control" required>
-                </div>
-                <button type="submit" class="btn">登录</button>
-            </form>
-            <p class="form-footer">没有账号？ <a href="#" onclick="showForm('register')">立即注册</a></p>
-        </div>
-
-        <!-- 注册表单 -->
-        <div id="registerForm" class="form-container">
-            <h2 class="form-title">用户注册</h2>
-            <form id="registerForm" onsubmit="return handleRegister(event)">
-                <div class="form-group">
-                    <label>用户名</label>
-                    <input type="text" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>电子邮箱</label>
-                    <input type="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>密码</label>
-                    <input type="password" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>确认密码</label>
-                    <input type="password" class="form-control" required>
-                </div>
-                <button type="submit" class="btn">立即注册</button>
-            </form>
-            <p class="form-footer">已有账号？ <a href="#" onclick="showForm('login')">立即登录</a></p>
-        </div>
+    <div class="container" id="registerContainer" style="display: none;">
+        <h2 class="form-title">创建账号</h2>
+        <form class="form-container" id="registerForm">
+            <div class="input-group">
+                <input type="text" id="registerUsername" placeholder="用户名" required>
+                <div class="error-message" id="registerUsernameError"></div>
+            </div>
+            <div class="input-group">
+                <input type="email" id="registerEmail" placeholder="电子邮箱" required>
+                <div class="error-message" id="registerEmailError"></div>
+            </div>
+            <div class="input-group">
+                <input type="password" id="registerPassword" placeholder="密码（至少6位）" required>
+                <div class="error-message" id="registerPasswordError"></div>
+            </div>
+            <button type="submit" class="btn">注册</button>
+        </form>
+        <p class="link-text">已有账号？ <a href="#" onclick="showLogin()">立即登录</a></p>
     </div>
 
     <script>
-        // 切换表单显示
-        function showForm(formType) {
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
+        // 初始化本地存储
+        if (!localStorage.getItem('users')) {
+            localStorage.setItem('users', JSON.stringify([]));
+        }
+
+        function showRegister() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('registerContainer').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.getElementById('registerContainer').style.display = 'none';
+            document.getElementById('loginContainer').style.display = 'block';
+        }
+
+        // 注册处理
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            if (formType === 'login') {
-                loginForm.style.display = 'block';
-                registerForm.style.display = 'none';
-            } else {
-                loginForm.style.display = 'none';
-                registerForm.style.display = 'block';
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            
+            // 简单验证
+            if (password.length < 6) {
+                showError('registerPasswordError', '密码至少需要6位');
+                return;
             }
+
+            const users = JSON.parse(localStorage.getItem('users'));
+            if (users.some(user => user.email === email)) {
+                showError('registerEmailError', '该邮箱已注册');
+                return;
+            }
+
+            users.push({ username, email, password });
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            alert('注册成功！');
+            showLogin();
+        });
+
+        // 登录处理
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const users = JSON.parse(localStorage.getItem('users'));
+            const user = users.find(u => u.email === email);
+            
+            if (!user) {
+                showError('loginEmailError', '该邮箱未注册');
+                return;
+            }
+            
+            if (user.password !== password) {
+                showError('loginPasswordError', '密码错误');
+                return;
+            }
+
+            alert(`欢迎回来，${user.username}!`);
+            // 这里可以跳转到用户主页
+        });
+
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            setTimeout(() => errorElement.style.display = 'none', 3000);
         }
 
-        // 处理登录提交
-        function handleLogin(event) {
-            event.preventDefault();
-            // 这里添加登录逻辑
-            alert('登录功能需要后端支持');
-            return false;
-        }
-
-        // 处理注册提交
-        function handleRegister(event) {
-            event.preventDefault();
-            // 这里添加注册逻辑
-            alert('注册功能需要后端支持');
-            return false;
-        }
-
-        // 初始化显示注册表单
-        showForm('register');
+        // 输入时清除错误提示
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                const errorElement = input.parentElement.querySelector('.error-message');
+                errorElement.style.display = 'none';
+            });
+        });
     </script>
 </body>
 </html>
