@@ -1,0 +1,42 @@
+<!-- main.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">我的网站</a>
+            <div class="navbar-text ms-auto">
+                欢迎，<span id="username"></span>
+                <button class="btn btn-sm btn-light ms-2" onclick="logout()">退出登录</button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-5">
+        <h1>欢迎访问主页面！</h1>
+        <p>这里是您登录后的内容...</p>
+    </div>
+
+    <script>
+        // 检查登录状态
+        const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        if(!currentUser) {
+            window.location.href = 'login.html';
+        }
+        
+        // 显示用户名
+        document.getElementById('username').textContent = currentUser.username;
+        
+        function logout() {
+            sessionStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
